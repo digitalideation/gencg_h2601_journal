@@ -10,5 +10,6 @@ publish: true
 
 Foundation week: setting up the journal and confirming the publishing workflow.
 
-- [[weeks/w01/journal|Journal]]
-- [Test p5.js sketch](./sketches/01-test/)
+- 
+- [[embed examples]]
+- 

@@ -1,5 +1,5 @@
 ---
-title: First test with Obsidian
+title: Embed examples
 date: 2026-10-01
 week: 1
 tags:
