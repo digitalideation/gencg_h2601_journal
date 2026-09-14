@@ -1,5 +1,5 @@
 ---
-title: Visual Workflow — Iteration 01
+title: Experiment 02
 date: 2026-09-14
 week: 1
 tags:
@@ -8,8 +8,6 @@ tags:
   - experiment
 publish: true
 ---
-
-# Visual Workflow — Iteration 02
 
 ## Notes
 

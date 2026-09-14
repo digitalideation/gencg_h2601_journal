@@ -8,13 +8,14 @@ tags:
   - experiment
 publish: true
 ---
-## Responsive sketch test
+
+# Responsive sketch test
 
 The sketch below is a standalone page embedded in this journal entry.
 
 ![[./sketches/01-test/index.html]]
 
-## Drawing test
+# Drawing test
 
 The journal owns the surrounding context; the embedded page contains only the creative code canvas.
 

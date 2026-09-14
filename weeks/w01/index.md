@@ -8,8 +8,6 @@ tags:
 publish: true
 ---
 
-# Week 01
-
 Foundation week: setting up the journal and confirming the publishing workflow.
 
 - [[weeks/w01/journal|Journal]]

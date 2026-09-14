@@ -8,8 +8,6 @@ tags:
 publish: true
 ---
 
-# Week 02
-
 Continue working on the journal and experiments
 
 - [[weeks/w02/journal|Journal]]
