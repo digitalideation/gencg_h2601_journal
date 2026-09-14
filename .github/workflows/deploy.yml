@@ -24,13 +24,13 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      # 1. Checkout the Obsidian vault
+      # Checkout the Obsidian vault
       - name: Checkout vault
         uses: actions/checkout@v6
         with:
           path: vault
 
-      # 2. Checkout Quartz v5
+      # Checkout Quartz v5
       - name: Checkout Quartz v5
         uses: actions/checkout@v6
         with:
@@ -38,14 +38,14 @@ jobs:
           ref: v5
           path: quartz
 
-      # 3. Setup Node.js
+      # Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v7
         with:
           node-version: 22
           package-manager-cache: false
 
-      # 4. Copy the complete vault into Quartz content
+      # Copy the complete vault into Quartz content
       #
       # Markdown will be processed by Quartz.
       # HTML, JS, CSS and other assets are emitted as content assets.
@@ -59,66 +59,83 @@ jobs:
             --exclude='.trash/' \
             vault/ quartz/content/
 
-      # 5. Convert Obsidian HTML embeds into web iframes
-      #
-      # ![[sketches/01-test/index.html]]
-      #
-      # becomes:
-      #
-      # <iframe src="./sketches/01-test/index.html"></iframe>
-      #
-      # Optional dimensions:
-      #
-      # ![[sketches/01-test/index.html|800x500]]
-      - name: Convert Obsidian HTML embeds
+      # # Convert Obsidian HTML embeds into web iframes
+      # #
+      # # ![[sketches/01-test/index.html]]
+      # #
+      # # becomes:
+      # #
+      # # <iframe src="./sketches/01-test/index.html"></iframe>
+      # #
+      # # Optional dimensions:
+      # #
+      # # ![[sketches/01-test/index.html|800x500]]
+      # - name: Convert Obsidian HTML embeds
+      #   run: |
+      #     python3 <<'PY'
+      #     from pathlib import Path
+      #     import re
+
+      #     pattern = re.compile(
+      #         r'!\[\[([^\]|]+\.html)(?:\|(\d+)x(\d+))?\]\]'
+      #     )
+
+      #     def convert(match):
+      #         src = match.group(1)
+      #         width = match.group(2) or "100%"
+      #         height = match.group(3) or "600"
+
+      #         if not src.startswith((".", "/")):
+      #             src = "./" + src
+
+      #         return (
+      #             f'<iframe src="{src}" '
+      #             f'width="{width}" '
+      #             f'height="{height}" '
+      #             f'loading="lazy" '
+      #             f'sandbox="allow-scripts"></iframe>'
+      #         )
+
+      #     for file in Path("quartz/content").rglob("*.md"):
+      #         text = file.read_text(encoding="utf-8")
+      #         updated = pattern.sub(convert, text)
+
+      #         if updated != text:
+      #             print(f"Converted embeds in {file}")
+      #             file.write_text(updated, encoding="utf-8")
+      #     PY
+
+      # Configure Quartz
+      - name: Configure Quartz
         run: |
-          python3 <<'PY'
-          from pathlib import Path
-          import re
+          cp vault/quartz.config.yaml quartz/quartz.config.yaml
 
-          pattern = re.compile(
-              r'!\[\[([^\]|]+\.html)(?:\|(\d+)x(\d+))?\]\]'
-          )
+          OWNER="${GITHUB_REPOSITORY%%/*}"
+          REPO="${GITHUB_REPOSITORY#*/}"
 
-          def convert(match):
-              src = match.group(1)
-              width = match.group(2) or "100%"
-              height = match.group(3) or "600"
+          if [ "$REPO" = "$OWNER.github.io" ]; then
+            BASE_URL="$OWNER.github.io"
+          else
+            BASE_URL="$OWNER.github.io/$REPO"
+          fi
 
-              if not src.startswith((".", "/")):
-                  src = "./" + src
-
-              return (
-                  f'<iframe src="{src}" '
-                  f'width="{width}" '
-                  f'height="{height}" '
-                  f'loading="lazy" '
-                  f'sandbox="allow-scripts"></iframe>'
-              )
-
-          for file in Path("quartz/content").rglob("*.md"):
-              text = file.read_text(encoding="utf-8")
-              updated = pattern.sub(convert, text)
-
-              if updated != text:
-                  print(f"Converted embeds in {file}")
-                  file.write_text(updated, encoding="utf-8")
-          PY
-
-      # 6. Install Quartz
+          sed -i "s|__BASE_URL__|$BASE_URL|" quartz/quartz.config.yaml
+          
+      # Install Quartz
       - name: Install Quartz
         working-directory: quartz
         run: |
           npm ci
           npx quartz plugin install --clean
+          npx quartz plugin install --from-config
 
-      # 7. Build the site
+      # Build the site
       - name: Build Quartz
         working-directory: quartz
         run: |
           npx quartz build
 
-      # 8. Prepare GitHub Pages
+      # Prepare GitHub Pages
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
@@ -127,7 +144,7 @@ jobs:
         with:
           path: quartz/public
 
-      # 9. Deploy
+      # Deploy
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
