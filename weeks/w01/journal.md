@@ -1,5 +1,5 @@
 ---
-title: Week 01 Journal — Instructions & Systems
+title: Instructions & Systems
 date: 2026-09-14
 week: 1
 tags:
@@ -8,8 +8,6 @@ tags:
   - journal
 publish: true
 ---
-
-# Week 01: Instructions & Systems
 
 > [!important] Complete this week's exercises and reflections yourself
 > Lesson 01 is a **Human-only** session: do not use generative AI to invent rules, write or debug the p5.js exercise, or write your process notes. This page is only a structure for documenting your own work.
@@ -45,12 +43,12 @@ Keep evidence of the process, not only the successful result.
 
 **First instruction set**
 
-1. 
-2. 
-3. 
-4. 
-5. 
-6. 
+1.
+2.
+3.
+4.
+5.
+6.
 
 **First execution**
 
@@ -58,17 +56,17 @@ Keep evidence of the process, not only the successful result.
 
 **Where did interpretation differ?**
 
-- 
-- 
+-
+-
 
 **Revised instructions**
 
-1. 
-2. 
-3. 
-4. 
-5. 
-6. 
+1.
+2.
+3.
+4.
+5.
+6.
 
 **Second execution**
 
@@ -76,12 +74,12 @@ Keep evidence of the process, not only the successful result.
 
 ### Small rule system
 
-- **Starting condition:** 
-- **Action:** 
-- **Relationship:** 
-- **Variation:** 
-- **Constraint:** 
-- **Stopping rule:** 
+- **Starting condition:**
+- **Action:**
+- **Relationship:**
+- **Variation:**
+- **Constraint:**
+- **Stopping rule:**
 
 <!-- Add a sketch or diagram of the system. -->
 
@@ -89,8 +87,8 @@ Keep evidence of the process, not only the successful result.
 
 What did a human understand automatically that the computer needed you to specify?
 
-- 
-- 
+-
+-
 
 ```js
 // Add your own p5.js translation here.
@@ -99,23 +97,23 @@ What did a human understand automatically that the computer needed you to specif
 **Parameters tested**
 
 | Parameter | Values tried | What changed |
-|---|---|---|
-|  |  |  |
-|  |  |  |
+| --------- | ------------ | ------------ |
+|           |              |              |
+|           |              |              |
 
 **Technical challenges or failed attempts**
 
-- 
-- 
+-
+-
 
 ## 2. Influences & References
 
 Choose at least one work, artist, or idea from the lesson or your own research.
 
-- **Artist / work:** 
-- **Link or citation:** 
-- **What I noticed:** 
-- **How it connects to my experiment:** 
+- **Artist / work:**
+- **Link or citation:**
+- **What I noticed:**
+- **How it connects to my experiment:**
 
 Possible starting points from the lesson include Sol LeWitt, Conditional Design, George Brecht, Alison Knowles, and Yoko Ono.
 
@@ -123,11 +121,11 @@ Possible starting points from the lesson include Sol LeWitt, Conditional Design,
 
 **What stays fixed?**
 
-- 
+-
 
 **What can vary?**
 
-- 
+-
 
 **Describe the system in plain language or pseudocode**
 

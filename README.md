@@ -77,7 +77,8 @@ For example:
   width="800"
   height="600"
   style="border: 0;"
-  allowfullscreen>
+  allowfullscreen
+>
 </iframe>
 ```
 
@@ -195,7 +196,8 @@ Embed a sketch hosted in the p5.js Editor:
   width="800"
   height="600"
   style="border: 0;"
-  allowfullscreen>
+  allowfullscreen
+>
 </iframe>
 ```
 
