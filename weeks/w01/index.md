@@ -15,16 +15,9 @@ publish: true
 
 The sketch below is a standalone page embedded in this journal entry.
 
-<div class="sketch-embed">
-  <iframe
-    src="./sketches/01-test/index.html"
-    title="Test p5.js sketch"
-    loading="lazy"
-    sandbox="allow-scripts">
-  </iframe>
-</div>
+![[./sketches/01-test/index.html|500x500]]
 
-[Open sketch in a new page](./sketches/01-test/index.html)
+
 
 ## Reflection
 
