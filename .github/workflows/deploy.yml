@@ -54,22 +54,34 @@ jobs:
             --exclude='.github/' \
             --exclude='.obsidian/' \
             --exclude='.trash/' \
+            --exclude='weeks/' \
             vault/ quartz/content/
 
-      # 4. Install Quartz dependencies and its default plugins
+      # 4. Copy standalone sketches as static files
+      - name: Copy standalone sketches as static files
+        run: |
+          mkdir -p quartz/static/weeks
+          rsync -av vault/weeks/ quartz/static/weeks/ \
+            --include='*/' \
+            --include='*.html' \
+            --include='*.js' \
+            --include='*.css' \
+            --exclude='*'
+
+      # 5. Install Quartz dependencies and its default plugins
       - name: Install Quartz
         working-directory: quartz
         run: |
           npm ci
           npx quartz plugin install --clean
 
-      # 5. Build the static site
+      # 6. Build the static site
       - name: Build Quartz
         working-directory: quartz
         run: |
           npx quartz build
 
-      # 6. Prepare GitHub Pages
+      # 7. Prepare GitHub Pages
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
@@ -78,7 +90,7 @@ jobs:
         with:
           path: quartz/public
 
-      # 7. Deploy
+      # 8. Deploy
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
