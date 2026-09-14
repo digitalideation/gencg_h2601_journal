@@ -10,6 +10,6 @@ publish: true
 
 Foundation week: setting up the journal and confirming the publishing workflow.
 
-- 
+- [[journal|Week 01 journal template]]
 - [[embed examples]]
-- 
+- [Lesson 01: Instructions & Systems](https://digitalideation.github.io/gencg_h2601/lessons/lesson01_intro/)
