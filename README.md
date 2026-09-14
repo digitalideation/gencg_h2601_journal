@@ -6,6 +6,31 @@ Write journal entries in [Obsidian](https://obsidian.md/). Create sketches local
 
 When you push changes to GitHub, the journal is automatically published as a website using Quartz and GitHub Pages.
 
+## Create your journal repository
+
+Create your own repository from this template before you begin:
+
+1. On the template repository page, select **Use this template**.
+2. Select **Create a new repository**.
+3. Choose your GitHub account as the owner.
+4. Give the repository a name.
+5. Choose **Public**, unless your instructor tells you otherwise.
+6. Select **Create repository**.
+
+Do not fork the template. A repository created from the template starts with a clean history containing a single initial commit.
+
+## Enable GitHub Pages
+
+Enable publishing once in your new repository:
+
+1. Open **Settings** in your repository.
+2. Select **Pages** under **Code, planning, and automation**.
+3. Under **Build and deployment**, set **Source** to **GitHub Actions**.
+4. Open the **Actions** tab and check the **Deploy Quartz** workflow.
+5. If the workflow has not started, open it and select **Run workflow**.
+
+After a successful deployment, GitHub shows the website address in **Settings > Pages**.
+
 ## Setup
 
 Install:
@@ -16,7 +41,7 @@ Install:
 
 Then:
 
-1. Clone this repository.
+1. Clone your new repository, not the template repository.
 2. Open Obsidian.
 3. Select **Open folder as vault**.
 4. Choose the cloned repository folder.
@@ -203,9 +228,9 @@ Embed a sketch hosted in the p5.js Editor:
 
 ## Publishing
 
-Pushing changes to `main` starts the GitHub Pages deployment automatically.
+After GitHub Pages is enabled, pushing changes to `main` starts the deployment automatically.
 
-Open the repository's **Actions** tab to check whether publishing succeeded. The deployment may take a few minutes.
+Open the repository's **Actions** tab to check whether the **Deploy Quartz** workflow succeeded. The deployment may take a few minutes.
 
 ## Privacy
 
