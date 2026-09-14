@@ -45,11 +45,10 @@ jobs:
           node-version: 22
           package-manager-cache: false
 
-      # 4. Copy vault into Quartz
+      # 4. Copy the complete vault into Quartz content
       #
-      # Markdown and normal assets go through Quartz.
-      # Standalone HTML sketches are excluded and copied
-      # verbatim after the Quartz build.
+      # Markdown will be processed by Quartz.
+      # HTML, JS, CSS and other assets are emitted as content assets.
       - name: Copy vault into Quartz
         run: |
           rm -rf quartz/content/*
@@ -58,12 +57,11 @@ jobs:
             --exclude='.github/' \
             --exclude='.obsidian/' \
             --exclude='.trash/' \
-            --exclude='weeks/*/sketches/' \
             vault/ quartz/content/
 
       # 5. Convert Obsidian HTML embeds into web iframes
       #
-      # ![[./sketches/01-test/index.html]]
+      # ![[sketches/01-test/index.html]]
       #
       # becomes:
       #
@@ -71,7 +69,7 @@ jobs:
       #
       # Optional dimensions:
       #
-      # ![[./sketches/01-test/index.html|800x500]]
+      # ![[sketches/01-test/index.html|800x500]]
       - name: Convert Obsidian HTML embeds
         run: |
           python3 <<'PY'
@@ -114,29 +112,13 @@ jobs:
           npm ci
           npx quartz plugin install --clean
 
-      # 7. Build the Quartz site
+      # 7. Build the site
       - name: Build Quartz
         working-directory: quartz
         run: |
           npx quartz build
 
-      # 8. Copy standalone sketches verbatim into the finished site
-      #
-      # vault/weeks/w01/sketches/01-test/index.html
-      #
-      # becomes:
-      #
-      # public/weeks/w01/sketches/01-test/index.html
-      - name: Copy standalone sketches
-        run: |
-          find vault/weeks -type d -name sketches -print0 | \
-          while IFS= read -r -d '' dir; do
-            rel="${dir#vault/}"
-            mkdir -p "quartz/public/$rel"
-            rsync -av "$dir/" "quartz/public/$rel/"
-          done
-
-      # 9. Prepare GitHub Pages
+      # 8. Prepare GitHub Pages
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
@@ -145,7 +127,7 @@ jobs:
         with:
           path: quartz/public
 
-      # 10. Deploy
+      # 9. Deploy
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
