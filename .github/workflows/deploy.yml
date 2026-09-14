@@ -46,6 +46,9 @@ jobs:
           package-manager-cache: false
 
       # 3. Replace Quartz example content with vault content
+      #
+      # Keep weeks/wXX/index.md as normal Quartz content,
+      # but don't send standalone sketch files through Quartz.
       - name: Copy vault into Quartz
         run: |
           rm -rf quartz/content/*
@@ -54,13 +57,23 @@ jobs:
             --exclude='.github/' \
             --exclude='.obsidian/' \
             --exclude='.trash/' \
-            --exclude='weeks/' \
+            --exclude='weeks/*/sketches/' \
             vault/ quartz/content/
 
       # 4. Copy standalone sketches as static files
+      #
+      # Example:
+      # vault/weeks/w01/sketches/01-test/index.html
+      #
+      # becomes:
+      # /weeks/w01/sketches/01-test/index.html
+      #
+      # This makes relative iframe URLs such as
+      # ./sketches/01-test/index.html work from /weeks/w01/.
       - name: Copy standalone sketches as static files
         run: |
           mkdir -p quartz/static/weeks
+
           rsync -av vault/weeks/ quartz/static/weeks/ \
             --include='*/' \
             --include='*.html' \
@@ -68,7 +81,7 @@ jobs:
             --include='*.css' \
             --exclude='*'
 
-      # 5. Install Quartz dependencies and its default plugins
+      # 5. Install Quartz dependencies and default plugins
       - name: Install Quartz
         working-directory: quartz
         run: |
