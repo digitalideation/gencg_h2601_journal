@@ -4,6 +4,9 @@ import { visit } from "unist-util-visit"
 const htmlEmbedRegex =
   /!\[\[([^\]|]+\.html)(?:\|(\d+)(?:x(\d+))?)?\]\]/gi
 
+const svgEmbedRegex =
+  /!\[\[([^\]|]+\.svg)(?:\|(\d+)(?:x(\d+))?)?\]\]/gi
+
 function escapeAttribute(value: string): string {
   return value
     .replaceAll("&", "&amp;")
@@ -17,7 +20,38 @@ export const HtmlEmbed: QuartzTransformerPlugin = () => {
     name: "HtmlEmbed",
 
     textTransform(_ctx, src) {
-      return src.replace(
+      // SVG:
+      //
+      // ![[attachments/image.svg]]
+      // ![[attachments/image.svg|800]]
+      // ![[attachments/image.svg|800x500]]
+      //
+      // Convert to <img> BEFORE CrawlLinks.
+      // CrawlLinks will then resolve the path correctly.
+      src = src.replace(
+        svgEmbedRegex,
+        (_match, rawSrc: string, rawWidth?: string, rawHeight?: string) => {
+          const embedSrc = rawSrc.trim()
+
+          const size =
+            rawWidth !== undefined
+              ? ` width="${rawWidth}"${
+                  rawHeight !== undefined
+                    ? ` height="${rawHeight}"`
+                    : ""
+                }`
+              : ""
+
+          return `<img src="${escapeAttribute(
+            embedSrc,
+          )}"${size} alt="" class="svg-embed">`
+        },
+      )
+
+      // Standalone HTML:
+      //
+      // Keep it hidden from CrawlLinks until after CrawlLinks runs.
+      src = src.replace(
         htmlEmbedRegex,
         (_match, rawSrc: string, rawWidth?: string, rawHeight?: string) => {
           const embedSrc = rawSrc.trim()
@@ -29,6 +63,8 @@ export const HtmlEmbed: QuartzTransformerPlugin = () => {
           )}" width="${width}" height="${height}"></quartz-html-embed>`
         },
       )
+
+      return src
     },
 
     htmlPlugins() {
