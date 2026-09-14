@@ -5,8 +5,6 @@ tags:
   - journal
 ---
 
-# Weekly Journal
-
 A small working journal for weekly notes, experiments, reflections, and creative-code sketches.
 
 ## Weeks
