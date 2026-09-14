@@ -27,9 +27,9 @@ The journal owns the surrounding context; the embedded page contains only the cr
 
 ![[attachments/image.jpg]]
 
-## Image with width
+## svg
 
-![[attachments/image.jpg|800]]
+![[image.svg]]
 
 ## Local video
 
