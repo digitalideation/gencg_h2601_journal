@@ -16,6 +16,7 @@ configuration:
     - private
     - templates
     - .obsidian
+    - README.md
 
   theme:
     fontOrigin: googleFonts
