@@ -42,3 +42,19 @@ The journal owns the surrounding context; the embedded page contains only the cr
 ## Interactive HTML sketch with width / height
 
 ![[./sketches/01-test/index.html|200x100]]
+
+## Audio
+
+![[attachments/audio.mp3]]
+
+## Callout
+
+> [!note]
+> Test
+
+## Mermaid
+
+```mermaid
+graph TD
+A --> B
+```
