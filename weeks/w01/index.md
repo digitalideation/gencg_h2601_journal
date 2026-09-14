@@ -15,9 +15,7 @@ publish: true
 
 The sketch below is a standalone page embedded in this journal entry.
 
-![[./sketches/01-test/index.html|500x500]]
-
-
+![[./sketches/01-test/index.html]]
 
 ## Reflection
 
