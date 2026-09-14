@@ -1,0 +1,84 @@
+name: Deploy Quartz POC
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      # 1. Checkout the Obsidian vault
+      - name: Checkout vault
+        uses: actions/checkout@v6
+        with:
+          path: vault
+
+      # 2. Checkout Quartz v5 separately
+      - name: Checkout Quartz v5
+        uses: actions/checkout@v6
+        with:
+          repository: jackyzha0/quartz
+          ref: v5
+          path: quartz
+
+      # Quartz v5 requires Node >= 22
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          package-manager-cache: false
+
+      # 3. Replace Quartz example content with vault content
+      - name: Copy vault into Quartz
+        run: |
+          rm -rf quartz/content/*
+          rsync -av \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            --exclude='.obsidian/' \
+            --exclude='.trash/' \
+            vault/ quartz/content/
+
+      # 4. Install Quartz dependencies and its default plugins
+      - name: Install Quartz
+        working-directory: quartz
+        run: |
+          npm ci
+          npx quartz plugin install --clean
+
+      # 5. Build the static site
+      - name: Build Quartz
+        working-directory: quartz
+        run: |
+          npx quartz build
+
+      # 6. Prepare GitHub Pages
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: quartz/public
+
+      # 7. Deploy
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
