@@ -5,8 +5,6 @@ tags:
   - sketches
 ---
 
-# Sketches
-
 Interactive sketches collected across the journal.
 
 ## Week 01

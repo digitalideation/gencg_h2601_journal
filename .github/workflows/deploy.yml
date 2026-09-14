@@ -83,7 +83,6 @@ jobs:
             --exclude='.obsidian/' \
             --exclude='.trash/' \
             --exclude='quartz.config.yaml' \
-            --exclude='weeks/*/sketches/' \
             vault/ quartz/content/
 
 
@@ -240,46 +239,46 @@ jobs:
           npx quartz build
 
 
-      # --------------------------------------------------------
-      # 9. COPY STANDALONE SKETCHES
-      #
-      # These bypass Quartz so that:
-      #
-      # index.html
-      # sketch.js
-      # style.css
-      # shaders
-      # json
-      # wasm
-      # images
-      # etc.
-      #
-      # remain unchanged.
-      # --------------------------------------------------------
+      # # --------------------------------------------------------
+      # # 9. COPY STANDALONE SKETCHES
+      # #
+      # # These bypass Quartz so that:
+      # #
+      # # index.html
+      # # sketch.js
+      # # style.css
+      # # shaders
+      # # json
+      # # wasm
+      # # images
+      # # etc.
+      # #
+      # # remain unchanged.
+      # # --------------------------------------------------------
 
-      - name: Copy standalone sketches
-        run: |
-          if [ -d vault/weeks ]; then
+      # - name: Copy standalone sketches
+      #   run: |
+      #     if [ -d vault/weeks ]; then
 
-            find vault/weeks \
-              -type d \
-              -name sketches \
-              -print0 | \
+      #       find vault/weeks \
+      #         -type d \
+      #         -name sketches \
+      #         -print0 | \
 
-            while IFS= read -r -d '' dir; do
+      #       while IFS= read -r -d '' dir; do
 
-              rel="${dir#vault/}"
+      #         rel="${dir#vault/}"
 
-              mkdir -p \
-                "quartz/public/$rel"
+      #         mkdir -p \
+      #           "quartz/public/$rel"
 
-              rsync -av \
-                "$dir/" \
-                "quartz/public/$rel/"
+      #         rsync -av \
+      #           "$dir/" \
+      #           "quartz/public/$rel/"
 
-            done
+      #       done
 
-          fi
+      #     fi
 
 
       # --------------------------------------------------------
