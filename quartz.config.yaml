@@ -75,7 +75,7 @@ plugins:
       keepBackground: false
     order: 20
 
-  - source: "github:gu-ma/obsidian-flavored-markdown"
+  - source: "@quartz-community/bsidian-flavored-markdown"
     enabled: true
     options:
       enableInHtmlEmbed: false
@@ -98,6 +98,10 @@ plugins:
     options:
       markdownLinkResolution: shortest
     order: 60
+
+  - source: "./quartz-plugins/html-embed"
+    enabled: true
+    order: 65
 
   - source: "@quartz-community/description"
     enabled: true

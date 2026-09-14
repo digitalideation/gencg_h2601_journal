@@ -83,6 +83,7 @@ jobs:
             --exclude='.obsidian/' \
             --exclude='.trash/' \
             --exclude='quartz.config.yaml' \
+            --exclude='quartz-plugins/' \
             --exclude='weeks/*/sketches/' \
             vault/ quartz/content/
 
@@ -214,9 +215,16 @@ jobs:
       #             )
       #     PY
 
+      # --------------------------------------------------------
+      # 7. COPY LOCAL QUARTZ PLUGINS
+      # --------------------------------------------------------
+      - name: Copy local Quartz plugins
+        run: |
+          rm -rf quartz/quartz-plugins
+          cp -R vault/quartz-plugins quartz/quartz-plugins
 
       # --------------------------------------------------------
-      # 7. INSTALL QUARTZ + CONFIGURED PLUGINS
+      # 8. INSTALL QUARTZ + CONFIGURED PLUGINS
       #
       # --from-config installs things such as the Excalidraw
       # Quartz plugin declared in quartz.config.yaml.
@@ -231,7 +239,7 @@ jobs:
 
 
       # --------------------------------------------------------
-      # 8. BUILD
+      # 9. BUILD
       # --------------------------------------------------------
 
       - name: Build Quartz
@@ -241,7 +249,7 @@ jobs:
 
 
       # --------------------------------------------------------
-      # 9. COPY STANDALONE SKETCHES
+      # 10. COPY STANDALONE SKETCHES
       #
       # These bypass Quartz so that:
       #
@@ -283,7 +291,7 @@ jobs:
 
 
       # --------------------------------------------------------
-      # 10. GITHUB PAGES
+      # 11. GITHUB PAGES
       # --------------------------------------------------------
 
       - name: Configure GitHub Pages
@@ -297,7 +305,7 @@ jobs:
 
 
       # --------------------------------------------------------
-      # 11. DEPLOY
+      # 12. DEPLOY
       # --------------------------------------------------------
 
       - name: Deploy
