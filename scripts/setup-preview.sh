@@ -34,4 +34,4 @@ git clone --depth 1 --branch v5 https://github.com/jackyzha0/quartz.git "$PREVIE
 
 echo
 echo "Quartz preview dependencies are ready."
-echo "Run ./scripts/preview.sh to build and open the journal preview."
+echo "Run bash scripts/preview.sh to build and open the journal preview."
