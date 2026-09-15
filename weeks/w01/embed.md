@@ -17,7 +17,10 @@ The sketch below is a standalone page embedded in this journal entry.
 
 The sketch below is a standalone page embedded in this journal entry with a GUI
 
-![[weeks/w01/sketches/02-test/index.html]]
+![[./sketches/02-test/index.html]]
+
+> [!important] You MUST use a relative path when embeding a sketch NOT an absotlute path.  
+> For example use: `![[./sketches/02-test/index.html]]` instead of: `![[weeks/w01/sketches/02-test/index.html]]`
 
 # Drawing test
 
