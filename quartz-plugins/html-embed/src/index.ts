@@ -88,6 +88,7 @@ export const HtmlEmbed: QuartzTransformerPlugin = () => {
                 src,
                 width: node.properties?.width ?? "100%",
                 height: node.properties?.height ?? "600",
+                frameBorder: "0",
                 loading: "lazy",
                 sandbox: ["allow-scripts"],
                 className: ["html-embed"],

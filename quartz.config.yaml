@@ -23,32 +23,33 @@ configuration:
     cdnCaching: true
 
     typography:
-      header: Schibsted Grotesk
-      body: Source Sans Pro
+      title: Newsreader
+      header: Newsreader
+      body: Inter
       code: IBM Plex Mono
 
     colors:
       lightMode:
-        light: "#faf8f8"
-        lightgray: "#e5e5e5"
-        gray: "#b8b8b8"
-        darkgray: "#4e4e4e"
-        dark: "#2b2b2b"
-        secondary: "#284b63"
-        tertiary: "#84a59d"
-        highlight: rgba(143, 159, 169, 0.15)
-        textHighlight: "#fff23688"
+        light: "#f7f5ef"
+        lightgray: "#e7e2d8"
+        gray: "#9b978f"
+        darkgray: "#3b3935"
+        dark: "#181714"
+        secondary: "#9a3d28"
+        tertiary: "#536b59"
+        highlight: rgba(154, 61, 40, 0.09)
+        textHighlight: "#e9c46a66"
 
       darkMode:
-        light: "#161618"
-        lightgray: "#393639"
-        gray: "#646464"
-        darkgray: "#d4d4d4"
-        dark: "#ebebec"
-        secondary: "#7b97aa"
-        tertiary: "#84a59d"
-        highlight: rgba(143, 159, 169, 0.15)
-        textHighlight: "#b3aa0288"
+        light: "#1b1a17"
+        lightgray: "#34312b"
+        gray: "#777169"
+        darkgray: "#d2cec5"
+        dark: "#f3efe6"
+        secondary: "#df8068"
+        tertiary: "#9ab5a0"
+        highlight: rgba(223, 128, 104, 0.12)
+        textHighlight: "#d6ad4966"
 
 
 plugins:
@@ -93,6 +94,7 @@ plugins:
     layout:
       position: right
       priority: 30
+      condition: not-index
 
   - source: "@quartz-community/crawl-links"
     enabled: true
@@ -207,7 +209,7 @@ plugins:
       priority: 50
 
   - source: "@quartz-community/graph"
-    enabled: true
+    enabled: false
     layout:
       position: right
       priority: 10
@@ -224,8 +226,9 @@ plugins:
   - source: "@quartz-community/backlinks"
     enabled: true
     layout:
-      position: right
-      priority: 50
+      position: afterBody
+      priority: 30
+      condition: not-index
 
   - source: "@quartz-community/article-title"
     enabled: true
@@ -308,7 +311,7 @@ plugins:
     order: 50
 
   - source: "@quartz-community/note-properties"
-    enabled: true
+    enabled: false
     options:
       includeAll: false
       includedProperties:

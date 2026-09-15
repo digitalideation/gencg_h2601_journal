@@ -84,6 +84,7 @@ jobs:
             --exclude='.trash/' \
             --exclude='quartz.config.yaml' \
             --exclude='quartz-plugins/' \
+            --exclude='quartz-custom/' \
             --exclude='weeks/*/sketches/' \
             vault/ quartz/content/
 
@@ -109,6 +110,7 @@ jobs:
       - name: Configure Quartz
         run: |
           cp vault/quartz.config.yaml quartz/quartz.config.yaml
+          cp vault/quartz-custom/custom.scss quartz/quartz/styles/custom.scss
 
           OWNER="${GITHUB_REPOSITORY%%/*}"
           REPO="${GITHUB_REPOSITORY#*/}"

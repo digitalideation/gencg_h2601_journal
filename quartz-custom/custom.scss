@@ -1,0 +1,257 @@
+/*
+ * Editorial journal theme
+ *
+ * This file is copied over Quartz's generated custom.scss during deployment.
+ * Keep structural layout changes here and theme tokens in quartz.config.yaml.
+ */
+
+:root {
+  --journal-rule: color-mix(in srgb, var(--dark) 14%, transparent);
+  --journal-muted: color-mix(in srgb, var(--darkgray) 72%, var(--light));
+}
+
+body {
+  font-size: 17px;
+  letter-spacing: 0.002em;
+}
+
+.page {
+  max-width: 1480px;
+}
+
+@media (min-width: 1200px) {
+  .page > #quartz-body {
+    grid-template-columns: 248px minmax(0, 820px) 232px;
+    column-gap: 3rem;
+  }
+
+  .page > #quartz-body .sidebar {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+.page > #quartz-body .sidebar.left {
+  border-right: 1px solid var(--journal-rule);
+}
+
+.page > #quartz-body .sidebar.right {
+  border-left: 1px solid var(--journal-rule);
+}
+
+.page-title {
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+}
+
+.page-title a {
+  color: var(--dark);
+  font-weight: 600;
+}
+
+.search > .search-button {
+  border-radius: 0;
+  border-color: var(--journal-rule);
+}
+
+article {
+  font-size: 1rem;
+}
+
+article p,
+article li {
+  line-height: 1.72;
+}
+
+article > p:first-of-type {
+  font-size: 1.08rem;
+  line-height: 1.68;
+  color: var(--dark);
+}
+
+.article-title {
+  max-width: 18ch;
+  margin-top: 0.5rem;
+  margin-bottom: 0.7rem;
+  font-size: clamp(2.5rem, 5vw, 4.75rem);
+  font-weight: 500;
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+
+.content-meta,
+.breadcrumb-container {
+  color: var(--journal-muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+}
+
+article h1,
+article h2,
+article h3,
+article h4 {
+  font-weight: 550;
+  letter-spacing: -0.018em;
+  text-wrap: balance;
+}
+
+article h2 {
+  margin-top: 3.5rem;
+  padding-top: 0.55rem;
+  border-top: 1px solid var(--journal-rule);
+  font-size: 1.7rem;
+}
+
+article h3 {
+  margin-top: 2.4rem;
+  font-size: 1.25rem;
+}
+
+a.internal {
+  padding: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--secondary) 40%, transparent);
+  border-radius: 0;
+  background: transparent;
+}
+
+a.internal:hover {
+  border-bottom-color: var(--secondary);
+  background: transparent;
+}
+
+blockquote {
+  margin: 2.25rem 0;
+  padding: 0.25rem 0 0.25rem 1.4rem;
+  border-left-width: 1px;
+  font-family: var(--headerFont);
+  font-size: 1.2rem;
+}
+
+hr {
+  margin: 3rem auto;
+  background-color: var(--journal-rule);
+}
+
+img,
+video,
+audio,
+.svg-embed {
+  border-radius: 0;
+}
+
+/*
+ * Embedded sketches should meet the surrounding page without any browser
+ * chrome. !important intentionally wins over iframe attributes and plugin CSS.
+ */
+iframe,
+iframe.html-embed,
+.external-embed iframe {
+  display: block;
+  max-width: 100%;
+  margin: 1.75rem 0;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  background: transparent;
+}
+
+pre,
+code,
+figure[data-rehype-pretty-code-figure] > [data-rehype-pretty-code-title] {
+  border-radius: 0;
+}
+
+pre {
+  border-color: var(--journal-rule);
+}
+
+.toc,
+.backlinks {
+  font-size: 0.85rem;
+}
+
+footer {
+  margin-top: 5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--journal-rule);
+  color: var(--journal-muted);
+  font-size: 0.8rem;
+}
+
+/* Homepage: a chronological editorial index rather than a dashboard. */
+body[data-slug="index"] .article-title {
+  max-width: 12ch;
+}
+
+body[data-slug="index"] article {
+  margin-top: 3.5rem;
+}
+
+body[data-slug="index"] article > p:first-of-type {
+  max-width: 42rem;
+  font-family: var(--headerFont);
+  font-size: clamp(1.3rem, 2.2vw, 1.75rem);
+  line-height: 1.45;
+}
+
+body[data-slug="index"] article > h2 {
+  margin-top: 5rem;
+}
+
+body[data-slug="index"] article > h3 {
+  display: grid;
+  grid-template-columns: minmax(6rem, 0.3fr) 1fr;
+  margin: 0;
+  padding: 1.25rem 0 0.35rem;
+  border-top: 1px solid var(--journal-rule);
+  font-size: 1.4rem;
+}
+
+body[data-slug="index"] article > h3 + p {
+  margin: 0 0 1.5rem min(30%, 10rem);
+  color: var(--journal-muted);
+}
+
+@media (max-width: 1199px) {
+  .page > #quartz-body .sidebar.left,
+  .page > #quartz-body .sidebar.right {
+    border: 0;
+  }
+}
+
+@media (max-width: 800px) {
+  body {
+    font-size: 16px;
+  }
+
+  .article-title {
+    max-width: none;
+    font-size: clamp(2.35rem, 13vw, 3.5rem);
+  }
+
+  body[data-slug="index"] article {
+    margin-top: 2rem;
+  }
+
+  body[data-slug="index"] article > h2 {
+    margin-top: 3.5rem;
+  }
+
+  body[data-slug="index"] article > h3 {
+    display: block;
+  }
+
+  body[data-slug="index"] article > h3 + p {
+    margin-left: 0;
+  }
+
+  iframe,
+  iframe.html-embed {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
