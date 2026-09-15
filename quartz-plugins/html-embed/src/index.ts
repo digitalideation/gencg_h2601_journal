@@ -91,6 +91,7 @@ export const HtmlEmbed: QuartzTransformerPlugin = () => {
                 loading: "lazy",
                 sandbox: ["allow-scripts"],
                 className: ["html-embed"],
+                style: "border: 0;",
               }
 
               node.children = []
