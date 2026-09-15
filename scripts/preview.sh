@@ -15,7 +15,7 @@ cleanup() {
 trap cleanup EXIT INT TERM
 
 if [ ! -d "$PREVIEW_DIR/node_modules" ]; then
-  "$REPO_ROOT/scripts/setup-preview.sh"
+  bash "$REPO_ROOT/scripts/setup-preview.sh"
 fi
 
 echo "Synchronizing journal content..."
