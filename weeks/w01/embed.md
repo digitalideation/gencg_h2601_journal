@@ -17,7 +17,7 @@ The sketch below is a standalone page embedded in this journal entry.
 
 The sketch below is a standalone page embedded in this journal entry with a GUI
 
-![[weeks/w01/sketches/02-test/index.html|index]]
+![[weeks/w01/sketches/02-test/index.html]]
 
 # Drawing test
 
